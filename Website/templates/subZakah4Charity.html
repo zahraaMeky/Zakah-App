@@ -1,0 +1,246 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">
+            <span class="arabic-text">تسجيل الخروج </span> 
+            <i class="fas fa-sign-out-alt"  style="margin-left:10px;"></i>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" href="{%url 'charityPprofile'%}" style="color: #009146;">
+          <span class="arabic-text"> الملف التعريفى </span>
+          <i class="fas fa-user" style="margin-left:10px;"></i>
+        </a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+        <span class= 'arabic-text' style="margin-right: 10px;color: #009146;">{{charity_name}}</span>
+        <a class="navbar-brand" href="#">
+        {% if logo %}
+        <img class='donate_logo' src="{{logo}}" width="30" height="30">
+        {% else %}
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+        {% endif %}  
+        </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+<!--end navbar-->
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <ul class="nav nav-tabs" id="myTab" role="tablist" style="direction: rtl;">
+                    <li class="nav-item">
+                        <a class="nav-link active arabic-text" id="contact-tab" data-toggle="tab" href="#sub" role="tab" aria-controls="contact" aria-selected="false" style="color: #009146;">{{arzakakName}}</a>
+                    </li>
+                  </ul>              
+            </div><!--div col-->
+        </div><!--row-->
+          <!--End content row-->
+          <div class="row  justify-content-center">
+            <div class="col-md-10">
+              <div class="card dash-card">
+                  <!--content-->
+                  <div class="tab-content" id="myTabContent">
+                    <!--Add Zakah-->
+                    <div class="tab-pane fade show active" id="sub" role="tabpanel" aria-labelledby="content-tab">
+                      <!--ADD Cahrity Model -->
+                      <div class="row"><!-- row for add zakah type button -->
+                        <div class="col-md-12">
+                          <h5 class="text-center arabic-text">
+                              الصدقات الفرعية
+                          </h5>
+                        </div>
+                        <!--Add Button-->
+                       <div class="col-md-12">
+                        <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="الرجوع للخلف" data-trigger="hover">
+                          <a href="{%url 'dashboardOld' %}"class="btn"  style="color: #009146;">
+                            <i class="fas fa-fast-backward fa-lg"></i>
+                          </a>
+                        </span>
+                        <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف صدقة فرعية" data-trigger="hover">
+                          <button class="btn" id="addsubz4type4char" data-toggle="modal" value="{{enZakahName}}" data-target="#addsubzakah4Specifictype4charity">
+                            <i class="fas fa-plus-circle fa-2x" style="color: #009146;"></i>
+                          </button>
+                        </span>
+                       </div><!--col-md-->
+                     </div><!--row for add zakah  button-->
+                     <!-- DispalySubzakah-->
+                     <div class="row d-flex justify-content-end">
+                      <div id="res"></div>
+                      {%for subtype in subtypes%}
+                      <div class='col-md-4'>
+                        <div class='types' data-value={{subtype.id}} style='padding-left:10px;padding-right: 10px;margin-bottom: 20px;'>
+                         <span class='d-inline-block' data-toggle='popover' data-trigger='hover' data-placement='top' data-content='احذف صدقة' data-trigger='hover'>
+                          <form action="{% url 'deletesub4charity' %}" method="POST">
+                            {% csrf_token %}
+                          <input type="hidden" value={{subtype.id}} name="subid">
+                          <input type="hidden" value={{enZakahName}} name="name">
+                          <button class='delete_zsub4char' type="submit" style="border: none;background: none;color:#fff"><i class='fas fa-trash'></i></button>
+                         </form>
+                        </span>
+                        <span class='d-inline-block' data-toggle='popover' data-trigger='hover' data-placement='top' data-content='تحديث الصدقة الفرعية' data-trigger='hover'>
+                         <button class='edit_zsub4char' data-toggle='modal' data-target='#Editzsub4char' value="{{subtype.id}},{{enZakahName}},{{subtype.type_id}},{{subtype.sub_type_en}},{{subtype.sub_type_ar}}"style="border: none;background: none;color:#fff">
+                        <i class='far fa-edit'></i>
+                        </button>
+                       </span>
+                       <p class='text-center english-text' style='margin-bottom: 0;'>{{subtype.sub_type_en}}</p>
+                       <p class='text-center arabic-text'  style='margin-bottom: 0;'>{{subtype.sub_type_ar}}</p>
+                        </div>
+                       </div> 
+                      {%endfor%}
+                 </div><!--row-->
+                       <!-- start  Add Zakah model -->
+                       <div class="row">
+                         <div class="col-md">
+                          <form method="post" action="{%url 'addsub4type4char'%}" id="addsubzfortype4char_form">
+                            {% csrf_token %}
+                           <div class="modal fade"   id="addsubzakah4Specifictype4charity" tabindex="-1" role="dialog" aria-labelledby="addsubzakah4Specifictype4charityLabel" aria-hidden="true">
+                             <div class="modal-dialog" role="document">
+                               <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h5 class="modal-title text-center arabic-text" id="addsubzakah4Specifictype4charityLabel" dir="rtl" >اضف نوع صدقة فرعية</h5>
+                                   <button type="button" id="close-aszakah4chartype" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                   </button>
+                                 </div>
+                                 <div class="modal-body">
+                                   <div class="row" id="addsz4char">
+                                     <div class="col-md">
+                                      <input type="hidden" name="zakahnameurl">
+                                         <div class="input-group mb-3" dir="rtl">
+                                           <input type="text" id='addszakah_ar4chartype' class="form-control" placeholder="اسم الصدقة بالعربية" name="subar4type4charity">
+                                           <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon1">
+                                              <i class="fas fa-donate"></i>
+                                             </span>
+                                           </div>
+                                         </div><!--user-->
+                                         <!--message alert if empty-->
+                                         <div id="warningadd-subzakah_ar4typeChar" class="alert alert-danger text-right arabic-text" role="alert">
+                                               حقل اسم الصدقة بالعربية مطلوب 
+                                         </div>
+                                         <!--message alert if empty-->
+                                         <div class="input-group mb-3" dir="rtl">
+                                           <input type="text" id='addszakah_en4chartype' class="form-control" placeholder="اسم الصدقة بالانجليزية"  name="suben4type4charity">
+                                           <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon1">
+                                              <i class="fas fa-donate"></i>
+                                             </span>
+                                           </div>
+                                         </div><!--password-->
+                                           <!--message alert if empty-->
+                                           <div id="warningadd-subzakah_en4typeChar" class="alert alert-danger text-right arabic-text" role="alert">
+                                             حقل اسم الصدقة بالانجليزية مطلوب 
+                                       </div>
+                                       <div id="warningadd-subzakah_ex4typeChar" class="alert alert-danger text-right arabic-text" role="alert">
+                                       اسم الصدقة موجود بالفعل
+                                  </div>
+                                       <!--message alert if empty-->
+                                    
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                   <button type="button" id="closeaddszakah4charitytype" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                   <button type="submit" id="Addszakah4type4char" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+                                 </div>
+                               </div>
+                             </div>
+                           </div><!--model-->
+                           </form>
+                         </div>
+                       </div><!--row-->
+                       <!-- End model -->
+                       <!-- start  Eidit Zakah model -->
+                       <div class="row">
+                        <div class="col-md">
+                          <form method="post" action="{%url 'editsub4type4char'%}" id="editsub4type4char_form">
+                            {% csrf_token %}
+                          <div class="modal fade"   id="Editzsub4char" tabindex="-1" role="dialog" aria-labelledby="Editzsub4charLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-center arabic-text" id="Editzsub4charLabel" dir="rtl" >تحديث الصدقة الفرعية</h5>
+                                  <button type="button" id="Eidit_close-suzakah_type4char" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row" id="modalbody">
+                                    <div class="col-md">
+                                        <div class="input-group mb-3" dir="rtl">
+                                          <input type="text"  class="form-control" placeholder="اسم الصدقة بالعربية" name="editsubzar4ch">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                             <i class="fas fa-donate"></i>
+                                            </span>
+                                          </div>
+                                        </div><!--user-->
+                                        <!--message alert if empty-->
+                                        <div id="warning-Edit_szakah_ar4char" class="alert alert-danger text-right arabic-text" role="alert">
+                                              حقل اسم الصدقة بالعربية مطلوب 
+                                        </div>
+                                        <!--message alert if empty-->
+                                        <div class="input-group mb-3" dir="rtl">
+                                          <input type="text" id='Eidtzakah_en' class="form-control" placeholder="اسم الصدقة بالانجليزية" name="editsubzen4ch">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                             <i class="fas fa-donate"></i>
+                                            </span>
+                                          </div>
+                                        </div><!--password-->
+                                          <!--message alert if empty-->
+                                          <div id="warning-Eidit_szakah_en4char" class="alert alert-danger text-right arabic-text" role="alert">
+                                            حقل اسم الصدقة بالانجليزية مطلوب 
+                                          </div>
+                                          <div id="warning-Eidit_szakah_exit4ch" class="alert alert-danger text-right arabic-text" role="alert">
+                                            حقل اسم الصدقة موجود بالفعل 
+                                          </div>
+                                      <!--message alert if empty-->
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="hidden"  id='seteditsubval4char' class="form-control" name="val2edit4char">
+                                      
+                                      </div><!--password-->
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" id="Closeeditsubz4ch" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                  <button type="submit" id="Eidt_subtype4charity" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">تحديث</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!--model-->
+                        </form>
+                          </div>
+                        </div>
+                      </div><!--row-->
+                  
+                     </div>
+                     <!--zakah-->
+         
+          
+                </div><!--"tab-content-->   
+              </div><!--card-->
+     
+             
+            </div><!--col-->
+          </div><!--first row-->
+    </div><!--container-->
+  </main>
+ 
+ 
+  {%endblock%}

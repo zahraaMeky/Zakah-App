@@ -1,0 +1,775 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">
+          <span class="arabic-text">تسجيل الخروج </span> 
+          <i class="fas fa-sign-out-alt"  style="margin-left:10px;"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #009146;">
+          <span>{{userAdmin}}</span>
+          <i class="fas fa-user" style="margin-left:10px;"></i>
+        </a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+      <a class="navbar-brand" href="#">
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+      </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist" style="direction: rtl;">
+                
+                    <li class="nav-item">
+                        <a class="nav-link active arabic-text" id="contact-tab" data-toggle="tab" href="#charity" role="tab" aria-controls="contact" aria-selected="false" style="color: #009146;">اللجان</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link arabic-text" id="home-tab" data-toggle="tab" href="#device" role="tab" aria-controls="home" aria-selected="true" style="color: #009146;">الأجهزة</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link  arabic-text" id="zakah-tab" data-toggle="tab" href="#zakah" role="tab" aria-controls="contact" aria-selected="false" style="color: #009146;">الصدقة</a>
+                     </li>
+                  </ul>              
+            </div><!--div col-->
+        </div><!--row-->
+          <!--End content row-->
+          <div class="row  justify-content-center">
+            <div class="col-md-10">
+              <div class="card dash-card">
+                  <!--content-->
+                  <div class="tab-content" id="myTabContent">
+                    <!--Add Zakah-->
+                    <div class="tab-pane fade show" id="zakah" role="tabpanel" aria-labelledby="content-tab">
+                      <!--ADD Cahrity Model -->
+                      <div class="row"><!-- row for add zakah type button -->
+                        <div class="col-md-12">
+                          <h5 class="text-center arabic-text">أنواع الصدقة الأساسية</h5>
+                         </div>
+                       <div class="col-md">
+                         <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف صدقة" data-trigger="hover">
+                           <butaton class="btn" id="resetdev" data-toggle="modal" data-target="#ADDzakah">
+                             <i class="fas fa-plus-circle fa-2x" style="color: #009146;"></i>
+                           </button>
+                         </span>
+                       </div><!--col-md-->
+                     </div><!--row for add zakah  button-->
+                       <!-- start  Add Zakah model -->
+                       <div class="row">
+                         <div class="col-md">
+                           <div class="modal fade"   id="ADDzakah" tabindex="-1" role="dialog" aria-labelledby="ADDzakahLabel" aria-hidden="true">
+                             <div class="modal-dialog" role="document">
+                               <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h5 class="modal-title text-center arabic-text" id="ADDzakahLabel" dir="rtl" >اضف نوع صدقة</h5>
+                                   <button type="button" id="close-zakah" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                   </button>
+                                 </div>
+                                 <div class="modal-body">
+                                   <div class="row" id="modalbody">
+                                     <div class="col-md">
+                                         <div class="input-group mb-3" dir="rtl">
+                                           <input type="text" id='zakah_ar' class="form-control" placeholder="اسم الصدقة بالعربية" aria-label="Username" aria-describedby="basic-addon1">
+                                           <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon1">
+                                              <i class="fas fa-donate"></i>
+                                             </span>
+                                           </div>
+                                         </div><!--user-->
+                                         <!--message alert if empty-->
+                                         <div id="alert-zakah_ar" class="alert alert-danger text-right arabic-text" role="alert">
+                                               حقل اسم الصدقة بالعربية مطلوب 
+                                         </div>
+                                         <!--message alert if empty-->
+                                         <div class="input-group mb-3" dir="rtl">
+                                           <input type="text" id='zakah_en' class="form-control" placeholder="اسم الصدقة بالانجليزية" aria-label="pass" aria-describedby="basic-addon1">
+                                           <div class="input-group-prepend">
+                                             <span class="input-group-text" id="basic-addon1">
+                                              <i class="fas fa-donate"></i>
+                                             </span>
+                                           </div>
+                                         </div><!--password-->
+                                           <!--message alert if empty-->
+                                           <div id="alert-zakah_en" class="alert alert-danger text-right arabic-text" role="alert">
+                                             حقل اسم الصدقة بالانجليزية مطلوب 
+                                       </div>
+                                       <!--message alert if empty-->
+                                    
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                   <button type="button" id="closezakah" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                   <button type="button" id="Addzakah" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+                                 </div>
+                               </div>
+                             </div>
+                           </div><!--model-->
+                         </div>
+                       </div><!--row-->
+                       <!-- End model -->
+                       <!-- start  Eidit Zakah model -->
+                       <div class="row">
+                        <div class="col-md">
+                          <div class="modal fade"   id="Editzakah" tabindex="-1" role="dialog" aria-labelledby="EiditzakahLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-center arabic-text" id="EiditzakahLabel" dir="rtl" >تحديث نوع صدقة</h5>
+                                  <button type="button" id="Eidit_close-zakah_type" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row" id="modalbody">
+                                    <div class="col-md">
+                                        <div class="input-group mb-3" dir="rtl">
+                                          <input type="text" id='Eiditzakah_ar' class="form-control" placeholder="اسم الصدقة بالعربية" aria-label="Username" aria-describedby="basic-addon1">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                             <i class="fas fa-donate"></i>
+                                            </span>
+                                          </div>
+                                        </div><!--user-->
+                                        <!--message alert if empty-->
+                                        <div id="alert-Edit_zakah_ar" class="alert alert-danger text-right arabic-text" role="alert">
+                                              حقل اسم الصدقة بالعربية مطلوب 
+                                        </div>
+                                        <!--message alert if empty-->
+                                        <div class="input-group mb-3" dir="rtl">
+                                          <input type="text" id='Eidtzakah_en' class="form-control" placeholder="اسم الصدقة بالانجليزية" aria-label="pass" aria-describedby="basic-addon1">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                             <i class="fas fa-donate"></i>
+                                            </span>
+                                          </div>
+                                        </div><!--password-->
+                                          <!--message alert if empty-->
+                                          <div id="alert-Eidit_zakah_en" class="alert alert-danger text-right arabic-text" role="alert">
+                                            حقل اسم الصدقة بالانجليزية مطلوب 
+                                          </div>
+                                      <!--message alert if empty-->
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" id="CloseZakah_type" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                  <button type="button" id="EidtZakah_type" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">تحديث</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!--model-->
+                        </div>
+                      </div><!--row-->
+                      <!-- End  Edit Zakah  model -->
+                       <div id='zak' class="row d-flex justify-content-end">
+                        
+                       </div><!--row-->
+                     </div>
+                     <!--zakah-->
+                     <!--Add sub zakah modal -->
+                     <div class="row">
+                      <div class="col-md">
+                        <div class="modal fade"   id="addSubmodalzakah" tabindex="-1" role="dialog" aria-labelledby="ADDzakahLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-center arabic-text" id="addSubmodalzakahLabel" dir="rtl" >اضف صدقة فرعية </h5>
+                                <button type="button" id="close-subtypezakah" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md">
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="text" id='zakah_subar' class="form-control" placeholder="اسم الصدقة بالعربية" aria-label="Username" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                           <i class="fas fa-donate"></i>
+                                          </span>
+                                        </div>
+                                      </div><!--user-->
+                                      <!--message alert if empty-->
+                                      <div id="alert-zakah_subar" class="alert alert-danger text-right arabic-text" role="alert">
+                                            حقل اسم الصدقة بالعربية مطلوب 
+                                      </div>
+                                      <!--message alert if empty-->
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="text" id='zakah_suben' class="form-control" placeholder="اسم الصدقة بالانجليزية" aria-label="pass" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                           <i class="fas fa-donate"></i>
+                                          </span>
+                                        </div>
+                                      </div><!--password-->
+                                        <!--message alert if empty-->
+                                        <div id="alert-zakah_suben" class="alert alert-danger text-right arabic-text" role="alert">
+                                          حقل اسم الصدقة بالانجليزية مطلوب 
+                                    </div>
+                                    <div id="alert-zakahsubexit" class="alert alert-danger text-right arabic-text" role="alert">
+                                      هذه الصدقة موجودة بالفعل
+                                    </div>
+                                    <!--message alert if empty-->
+                                 
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" id="closesubzakah" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                <button type="button" id="Addsubzakah" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!--model-->
+                      </div>
+                    </div><!--row-->
+                     <!--End Subzakah Modal-->
+                    <!--ENd Add Zakah-->
+                  <div class="tab-pane fade show active" id="charity" role="tabpanel" aria-labelledby="content-tab">
+                   <!--ADD Cahrity Model -->
+                   <div class="row"><!-- row for add zakah type button -->
+                    <div class="col-md">
+                      <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف لجنة" data-trigger="hover">
+                        <butaton class="btn" data-toggle="modal" data-target="#ADDCharity">
+                          <i class="fas fa-plus-circle fa-2x" style="color: #009146;"></i>
+                        </button>
+                      </span>
+                    </div><!--col-md-->
+                  </div><!--row for add zakah  button-->
+                    <!-- start model -->
+                    <div class="row">
+                      <div class="col-md">
+                        <div class="modal fade"   id="ADDCharity" tabindex="-1" role="dialog" aria-labelledby="ADDCharityLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-center arabic-text" id="ADDCharitylLabel" dir="rtl" >اضف لجنة</h5>
+                                <button type="button" class="close close-fromchar" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row" id="modalbody">
+                                  <div class="col-md">
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="text" id='user_char' class="form-control" placeholder="اسم المستخدم " aria-label="Username" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-user"></i>
+                                          </span>
+                                        </div>
+                                      </div><!--user-->
+                                      <!--message alert if empty-->
+                                      <div id="alert-char-add-user" class="alert alert-danger text-right arabic-text" role="alert">
+                                            حقل اسم المستخدم مطلوب 
+                                      </div>
+                                      <!--message alert if empty-->
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="password" id='char_pass' class="form-control" placeholder="كلمة المرور" aria-label="pass" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-key"></i>
+                                          </span>
+                                        </div>
+                                      </div><!--password-->
+                                        <!--message alert if empty-->
+                                        <div id="alert-char-add-pass" class="alert alert-danger text-right arabic-text" role="alert">
+                                          حقل كلمة المرور مطلوب 
+                                        </div>
+                                    <!--message alert if empty-->
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" id="closeChar" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                <button type="button" class="btn btn-primary arabic-text AddChar"  style="background-color: #009146; border: none;">حفظ</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!--model-->
+                      </div>
+                    </div><!--row-->
+                    <!-- End model -->
+                   <!--End Charity Model-->
+                    <div class="row d-flex justify-content-end">
+                         {%for char in All_Details_charity%}
+                         <div class="col-md-4">
+                             <div class="types" data-value="{{char.username}}" style="padding-left:10px;padding-right: 10px;margin-bottom: 20px;">
+                              <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="احذف لجنة" data-trigger="hover">
+                                <button class="delete_char" value="{{char.username}}"><i class="fas fa-trash"></i></button>
+                              </span>
+                              <!--edit button-->
+                              <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="تحديث لجنة" data-trigger="hover">
+                                <button class=" btn edit_char" data-toggle="modal" data-target="#EditCharity" value="{{char.username}},{{char.password}},{{char.name_en}},{{char.name_ar}}">
+                                  <i class="far fa-edit"></i>
+                                </button>
+                              </span>
+                              <table class="table" style="margin-top: 5px;">
+                                  <tr style="color: #fff;">
+                                    <td style="padding: 0;"><p class="arabic-text text-left">{{char.name_ar}}</p></td> 
+                                    <td style="padding: 0;"><p class="arabic-text text-right">اسم اللجنة بالعربية</p> </td>   
+                                </tr>
+                                <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{char.name_en}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">اسم اللجنة بالانجليزية</p> </td>  
+                                </tr>
+                                <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{char.username}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">اسم المستخدم</p> </td>  
+                                </tr>
+                                <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0">
+                                      <input type="password" class="inp_pass" value="{{char.password}}">
+                                    </td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">كلمة المرور</p> </td>  
+                                </tr>
+                              </table>  
+                             </div><!--types-->
+                         </div><!--col-->
+                         {%endfor%}
+                    </div><!--row-->
+                  </div>
+                  <!--charity-->
+                  <!--device-->
+                  <div class="tab-pane fade" id="device" role="tabpanel" aria-labelledby="device-tab">
+                    <div class="row d-flex justify-content-center">
+                      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link  arabic-text" id="pills-unbuy-tab" data-toggle="pill" href="#pills-unbuy" role="tab" aria-controls="pills-unbuy" aria-selected="true">الغير المُباع</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link arabic-text active" id="pills-buy-tab" data-toggle="pill" href="#pills-buy" role="tab" aria-controls="pills-buy" aria-selected="false">المُباع</a>
+                        </li>
+                      </ul>
+                    </div><!--row-->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane fade show active" id="pills-buy" role="tabpanel" aria-labelledby="pills-buy-tab">
+                           <div class="row d-flex justify-content-end">
+                             {%for dev in P_dev%}
+                             <div class="col-md-4">
+                              <div class="types" data-value="{{dev.name}}" style="padding-left:10px;padding-right: 10px;margin-bottom:20px;">
+                                <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="احذف جهاز" data-trigger="hover">
+                                  <button class="delete_dev" value="{{dev.name}}"><i class="fas fa-trash"></i></button>
+                                </span>
+                                <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف جهاز للجنة" data-trigger="hover">
+                                  <button class="btn assign_dev" id='' data-toggle="modal" data-target="#assignDeviceLabel" value="{{dev.name}},{{dev.password}},{{dev.status}},{{dev.charity_name}},{{dev.start_date}},{{dev.last_maintenance}}">
+                                    <i class="fab fa-atlassian"></i></button>
+                                </span>
+                                <table class="table" style="margin-top: 5px;">
+                                    <tr style="color: #fff;">
+                                      <td style="padding: 0;"><p class="arabic-text text-left">{{dev.name}}</p></td> 
+                                      <td style="padding: 0;"><p class="arabic-text text-right">اسم الجهاز</p> </td>   
+                                    </tr>
+                               
+                                  <!-- <tr  style="color: #fff;">
+                                      <td style="border:none;padding:0">
+                                        <input type="password" value="{{dev.password}}" class="inp_pass">
+                                      </td>
+                                      <td style="border:none;padding:0"><p class="arabic-text text-right">كلمة المرور</p> </td>  
+                                  </tr> -->
+                                  <tr style="color: #fff;">
+                                    <td style="padding: 0;border:none;"><p class="arabic-text text-left">{{dev.Device_serial}}</p></td> 
+                                    <td style="padding: 0;border:none;"><p class="arabic-text text-right">رقم الجهاز</p> </td>   
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.city}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">الولاية</p> </td>  
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.address}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">العنوان</p> </td>  
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                      <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.start_date}}</p></td>
+                                      <td style="border:none;padding:0"><p class="arabic-text text-right">تاريخ البدء</p> </td>  
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                      <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.last_maintenance}}</p></td>
+                                      <td style="border:none;padding:0"><p class="arabic-text text-right">تاريخ الصيانة</p> </td>  
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.next_maintenance}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">تاريخ الصيانة القادم</p> </td>  
+                                  </tr>
+                                  <tr  style="color: #fff;">
+                                    <td style="border:none;padding:0"><p class="arabic-text text-left">{{dev.charity_name}}</p></td>
+                                    <td style="border:none;padding:0"><p class="arabic-text text-right">مُباع للجنة</p> </td>  
+                                </tr>
+                                </table>  
+                             </div>
+                            </div><!--content-->
+                             {%endfor%}
+                           </div>
+                          </div>
+                          <div class="tab-pane fade" id="pills-unbuy" role="tabpanel" aria-labelledby="pills-unbuy-tab">
+                            <!-- row for add zakah type button -->
+                            <!-- <div class="row">
+                              <div class="col-md">
+                                <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف جهاز" data-trigger="hover">
+                                  <butaton class="btn" data-toggle="modal" data-target="#ADDDeviceLabel">
+                                    <i class="fas fa-plus-circle fa-2x" style="color: #009146;"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div> -->
+                            <!--row for add zakah  button-->
+                            <div class="row">
+                              <div class="col-md">
+                                <div class="modal fade"   id="ADDDeviceLabel" tabindex="-1" role="dialog" aria-labelledby="ADDDeviceLabelLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title text-center arabic-text" id="ADDDeviceLabel" dir="rtl" >اضف جهاز</h5>
+                                        <button type="button" id="close4adddev" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="row" id="modalbody-device">
+                                          <div class="col-md">
+                                              <div class="input-group mb-3" dir="rtl">
+                                                <input type="text" id='devName' class="form-control" placeholder="اسم الجهاز" aria-label="Username" aria-describedby="basic-addon1">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fas fa-user"></i>
+                                                  </span>
+                                                </div>
+                                              </div><!--user-->
+                                               <!--message alert if empty-->
+                                              <div id="alert-dev-name" class="alert alert-danger text-right arabic-text" role="alert">
+                                                   حقل اسم الجهاز مطلوب 
+                                               </div>
+                                              <!--message alert if empty-->
+                                              <div class="input-group mb-3" dir="rtl">
+                                                <input type="password" id='devPass' class="form-control" placeholder="كلمة المرور" aria-label="pass" aria-describedby="basic-addon1">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fas fa-key"></i>
+                                                  </span>
+                                                </div>
+                                              </div><!--pass-->
+                                                 <!--message alert if empty-->
+                                                 <div id="alert-dev-pass" class="alert alert-danger text-right arabic-text" role="alert">
+                                                  حقل كلمة مرورالجهاز مطلوب 
+                                                  </div>
+                                             <!--message alert if empty-->
+                                              <div class="input-group mb-3" dir="rtl">
+                                                <input type="text" id='devMac' class="form-control" placeholder="ماك ادرس" aria-label="pass" aria-describedby="basic-addon1">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fas fa-key"></i>
+                                                  </span>
+                                                </div>
+                                              </div><!--pass-->
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" id="closeDev" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none; display:none">اغلاق</button>
+                                        <button type="button" class="btn btn-primary arabic-text AddDev"  style="background-color: #009146; border: none;">حفظ</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div><!--model-->
+                              </div>
+                            </div><!--row-->
+                            <div class="row  d-flex justify-content-end">
+                                {%for udev in U_dev%}
+                                <div class="col-md-4">
+                                  <div class="types" data-value="{{udev.name}}"style="padding-left:10px;padding-right: 10px;margin-bottom:20px;">
+                                    <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="احذف جهاز" data-trigger="hover">
+                                      <button class="delete_dev" value="{{udev.name}}"><i class="fas fa-trash"></i></button>
+                                    </span>
+                                    <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف جهاز للجنة" data-trigger="hover">
+                                      <button class="btn assign_dev"  data-toggle="modal" data-target="#assignDeviceLabel" value="{{udev.name}},{{udev.password}}" >
+                                        <i class="fab fa-atlassian"></i></button>
+                                    </span>
+                                    <table class="table" style="margin-top: 5px;">
+                                        <tr style="color: #fff;">
+                                          <td style="padding: 0;"><p class="arabic-text text-left">{{udev.name}}</p></td> 
+                                          <td style="padding: 0;"><p class="arabic-text text-right">اسم الجهاز</p> </td>   
+                                      </tr>
+                                      <!-- <tr  style="color: #fff;">
+                                          <td style="border:none;padding:0">
+                                            <input type="password" value="{{udev.password}}" class="inp_pass">
+                                            </td>
+                                          <td style="border:none;padding:0"><p class="arabic-text text-right">كلمة المرور</p> </td>  
+                                      </tr> -->
+                                      <tr  style="color: #fff;">
+                                        <td style="border:none;padding:0"><p class="arabic-text text-left">{{udev.city}}</p></td>
+                                        <td style="border:none;padding:0"><p class="arabic-text text-right">الولاية</p> </td>  
+                                     </tr>
+                                      <tr  style="color: #fff;">
+                                          <td style="border:none;padding:0"><p class="arabic-text text-left">{{udev.start_date}}</p></td>
+                                          <td style="border:none;padding:0"><p class="arabic-text text-right">تاريخ البدء</p> </td>  
+                                      </tr>
+                                      <tr  style="color: #fff;">
+                                          <td style="border:none;padding:0"><p class="arabic-text text-left">{{udev.last_maintenance }}</p></td>
+                                          <td style="border:none;padding:0"><p class="arabic-text text-right">تاريخ الصيانة</p> </td>  
+                                      </tr>
+                                      <tr style="color: #fff;">
+                                        <td style="border:none;padding:0"><p class="arabic-text text-right"></p> </td>  
+                                        <td style="border:none;padding:0"><p class="arabic-text text-right">غير مُباع للجنة</p> </td>  
+                                    </tr>
+                                    </table>  
+                                 </div>
+                                </div><!--content-->
+                                {% empty %}
+                                <div class="col">
+                                  <h6 class="text-center arabic-text">لا يوجد أجهزة</h6>
+                                </div>
+                               
+                                 {%endfor%}
+                              </div>
+                          </div>
+                        </div>
+                      </div><!--col-md-8-->
+                    </div><!--row-->
+                  </div>
+                  <!--device-->
+                </div><!--"tab-content-->   
+              </div><!--card-->
+              <!-- start assign model for devivce -->
+              <div class="row">
+                <div class="col-md">
+                  <div class="modal fade"   id="assignDeviceLabel" tabindex="-1" role="dialog" aria-labelledby="assignDeviceLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-center arabic-text" id="ADDDeviceLabel" dir="rtl" >اضف جهاز الى لجنة</h5>
+                          <button type="button" id="closeassidnudev" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row" id="modalbody-device">
+                            <div class="col-md">
+                              <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom:3px;">اسم الجهاز</p>
+                              <div class="input-group mb-3" dir="rtl">
+                                <input type="text" id='devnamefromedit' class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">
+                                    <i class="fas fa-signature"></i>
+                                  </span>
+                                </div>
+                            </div><!--name -->
+                          <!--message alert if empty-->
+                              <div id="alert-devEdit-name" class="alert alert-danger text-right arabic-text" role="alert">
+                                حقل اسم الجهاز مطلوب 
+                             </div>
+                        <!--message alert if empty-->
+                        <!-- <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom:3px;">كلمة المرور</p> -->
+                            <!-- <div class="input-group mb-3" dir="rtl">
+                              <input type="text" disabled id='devpassfromedit' class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                  <i class="fas fa-key"></i>
+                                </span>
+                              </div>
+                           </div> -->
+                          <!--message alert if empty-->
+                          <!-- <div id="alert-devEdit-pass" class="alert alert-danger text-right arabic-text" role="alert">
+                                  حقل كلمة مرورالجهاز مطلوب 
+                          </div> -->
+                          <!--message alert if empty-->
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" for="inputGroupSelect01">
+                                    <i class="fas fa-hand-pointer"></i>
+                                  </label>
+                                </div>
+                                <select id ="getchaN" class="custom-select arabic-text"   dir="rtl">
+                                  <option selected ></option>
+                                  {%for char in All_Details_charity%}
+                                  <!-- <option  value="{{char.username}}">{{char.username}}</option> -->
+                                  <option  value="{{char.name_ar}}">{{char.name_ar}}</option>
+                                  {%endfor%}
+                                </select>
+                              </div><!--charity-->
+                              <!--message alert if empty-->
+                               <div id="alert-devEdit-char" class="alert alert-danger text-right arabic-text" role="alert">
+                                      حقل اسم اللجنة مطلوب 
+                                </div>
+                              <!--message alert if empty-->
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" for="inputGroupSelect01">
+                                    <i class="fas fa-thermometer-quarter"></i>
+                                  </label>
+                                </div>
+                                <select id='devstatus' class="custom-select arabic-text"  dir="rtl">
+                                  <option  selected></option>
+                                  <option></option>
+                                  <!-- {% for i in loop%}    
+                                  <option  value="{{i}}">{%if i == 1%} يعمل {%else%} لا يعمل {%endif%} </option>
+                                  {%endfor%} -->
+                                </select>
+                              </div><!--status-->
+                            <!--message alert if empty-->
+                            <div id="alert-devEdit-status" class="alert alert-danger text-right arabic-text" role="alert">
+                            حقل حالةالجهاز مطلوب 
+                            </div>
+                           <!--message alert if empty-->
+                           <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom:3px;">تاريخ بدء الجهاز</p>
+                              <div class="input-group mb-3" dir="rtl">
+                                  <input type="date" id='devstartdate'class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                      <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                  </div>
+                              </div><!--date s-->
+                            <!--message alert if empty-->
+                            <div id="alert-devEdit-sdate" class="alert alert-danger text-right arabic-text" role="alert">
+                              حقل تاريخ البدء مطلوب 
+                              </div>
+                             <!--message alert if empty-->
+                             <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom:3px;">تاريخ صيانةالجهاز</p>
+                              <div class="input-group mb-3" dir="rtl">
+                                <input type="date" id='devEditmdate' class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">
+                                    <i class="far fa-calendar-alt"></i>
+                                  </span>
+                                </div>
+                            </div><!--maintainance_last s-->
+                              <!--message alert if empty-->
+                              <div id="alert-devEdit-mdate" class="alert alert-danger text-right arabic-text" role="alert">
+                                حقل تاريخ الصيانة مطلوب 
+                                </div>
+                               <!--message alert if empty-->
+                               <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom:3px;">تاريخ الصيانة القادم</p>
+                               <div class="input-group mb-3" dir="rtl">
+                                 <input type="text" id='NextMaintanance' class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                 <div class="input-group-prepend">
+                                   <span class="input-group-text" id="basic-addon1">
+                                     <i class="far fa-calendar-alt"></i>
+                                   </span>
+                                 </div>
+                             </div><!--Next Maintanance -->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" id="closeeditedev" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                          <button type="button" id= 'assignDev' class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">اضافة</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!--model-->
+                </div>
+              </div><!--row-->
+              <!--model for edit charity-->
+                    <!-- start model -->
+                    <div class="row">
+                      <div class="col-md">
+                        <div class="modal fade"   id="EditCharity" tabindex="-1" role="dialog" aria-labelledby="EditCharityLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-center arabic-text" id="EditCharityLabel" dir="rtl" >تحديث لجنة</h5>
+                                <button type="button" id="closechar4edit" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row" id="modalbody">
+                                  <div class="col-md">
+                                    <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom: 3px;">الاسم بالعربية</p>
+                                    <div class="input-group mb-3" dir="rtl">
+                                      <input type="text" id='name_ar4char' class="form-control" placeholder="الاسم بالعربية" aria-label="Username" aria-describedby="basic-addon1">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                          <i class="fas fa-signature"></i>
+                                        </span>
+                                      </div>
+                                    </div><!--ar name-->
+                                     <!--message alert if empty-->
+                                     <div id="alert-char-ar-n" class="alert alert-danger text-right arabic-text" role="alert">
+                                      حقل اسم اللجنة بالعربية مطلوب 
+                                      </div>
+                                      <!--message alert if empty-->
+                                    <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom: 3px;">الاسم بالانجليزية</p>
+                                    <div class="input-group mb-3" dir="rtl">
+                                      <input type="text" id='name_en4char' class="form-control" placeholder="الاسم بالانجليزية" aria-label="Username" aria-describedby="basic-addon1">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                          <i class="fas fa-signature"></i>
+                                        </span>
+                                      </div>
+                                    </div><!--en name-->
+                                     <!--message alert if empty-->
+                                     <div id="alert-char-en-n" class="alert alert-danger text-right arabic-text" role="alert">
+                                      حقل اسم اللجنة بالانجليزية مطلوب 
+                                      </div>
+                                      <!--message alert if empty-->
+                                      <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom: 3px;">اسم المستخدم</p>
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="text" id='username_char' class="form-control" placeholder="اسم المستخدم " aria-label="Username" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-user"></i>
+                                          </span>
+                                        </div>
+                                      </div><!--user-->
+                                      <p class="arabic-text text-right" style="font-size: 0.9rem;margin-bottom: 3px;">كلمة المرور</p>
+                                      <div class="input-group mb-3" dir="rtl">
+                                        <input type="text" id='passchar' class="form-control" placeholder="كلمة المرور" aria-label="pass" aria-describedby="basic-addon1">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-key"></i>
+                                          </span>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" id="close-fromEditchar" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                <button type="button" id='editmychar' class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">تحديث</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!--model-->
+                      </div>
+                    </div><!--row-->
+                    <!-- End model -->
+            </div><!--col-->
+          </div><!--first row-->
+          <!--start form -->
+          <form id="Form2sendid" action="{% url 'addzakah4ch' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="zakahId" value="" id="zakahId">
+          </form>
+          <!--end form -->
+    </div><!--container-->
+  </main>
+  <script>
+    //set today date into input type date value 
+    const deviceStaring = document.getElementById('devstartdate');
+    deviceStaring.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+
+    const devicemaintainance_edit = document.getElementById('devEditmdate');
+    devicemaintainance_edit.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+  </script>
+  {%endblock%}

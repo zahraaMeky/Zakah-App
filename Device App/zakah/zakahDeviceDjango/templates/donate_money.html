@@ -1,0 +1,105 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                        <a class='hvr-grow' href="{% url 'sub_type' %}">
+                            <i class="fas fa-arrow-alt-circle-left fa-3x" style="color: #212529;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10">
+                        <div class="row d-flex justify-content-center">
+                
+                            <div class="col">
+                                <div class="zakah_logo">
+                                    <img class="img-fluid" src="{{charity.logo}}" width="150" height="150"> 
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain image)-->
+                    
+                        </div><!-- end row div (internal row inside col-10)row one-->
+                        <div class="mb-3"></div>
+                         <!--start second row-->
+                        <div class="row">
+                            <div class="col">
+                                <div class="zakah_heading">
+                                   <span class="english-heading">Deposit<span>
+                                    <span class="arabic-heading">إيداع مبلغ<span>
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain heading)-->
+                        </div><!-- end row div (internal row inside col-10)row 2-->
+                        <div class="mb-3"></div>
+                        <!--start third row-->
+                        <div class="row" >
+                            <div class="col d-flex justify-content-center"> 
+                                <div class="input-money">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                    <div class="input-group mb-5">
+                                        <span class="input-group-text">Amount</span>
+                                        <input id= 'amount' type="text" class="form-control" name="amount"  style="text-align:center;">
+                                        <span class="input-group-text">المبلغ </span>
+                                      </div><!-- End input-group -->
+                            
+                                      <!-- Start imoving icon -->
+                                      <div class="zakah_donate bounce-2 donate-icon">
+                                        <img class="img-fluid bounce-2" src="{% static 'assets/images/deposit-icon.png'%}">
+                                    </div> <!-- End imoving icon -->
+                                    <div class="message">
+                                        <!--messages-->
+                                        {% if messages %}
+                                        <div class="alert alert-warning" role="alert">
+                                            {%for message in messages%}
+                                                <span class="pe-2">{{message}}</span>
+                                            {%endfor%}
+                                        </div>
+                                        {%endif%}
+                                        <!-- end messages-->
+                                </div><!-- end message div-->
+                                    <div class="wrapper">
+                                        <input type="hidden" value="finish" name="finish">
+                                        <input type="hidden" class="text form-control" id="p_result" />
+						                <input type="hidden" class="text form-control" id="p_name" value="Printer1" />
+                                        <button class="finish-btn" type="submit" >
+                                              <span class="english-finish">Finish</span> 
+                                              <span class="arabic-finish">إنتهاء</span> 
+                                          <span class="sp"></span>
+                                          <span  class="sp"></span>
+                                          <span  class="sp"></span>
+                                          <span  class="sp"></span>
+                                        </button>
+                                      </div>
+                                    </form><!-- End form-->
+                                </div> <!-- End input-money -->
+                            </div><!-- End col-2 (one)(contain icon)-->
+                            </div><!--end row-->
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-3">
+                                 
+                                </div><!-- end col div-->
+                            </div><!-- end row div-->
+                    </div><!-- end col-10 div-->
+                </div><!-- end row div-->
+
+               <script type="text/javascript">
+
+                        //   setInterval(function(){
+                        //    $.ajax({
+                        //      method:'GET',
+                        //      url: "get_money/",
+                        //      success: function(response){
+                        //        var m = response.money
+                        //        console.log(m);
+                        //        $("#amount").val(m + " OMR");
+                        //        console.log(response);
+                        //    }});
+                        // },500);
+
+
+                    window.setTimeout(function(){
+                      window.location.href = "{%url 'index'%}";
+                    }, 600000);
+
+               </script>
+                {% endblock %}   

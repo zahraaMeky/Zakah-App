@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/css/all.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/css/fonts.css'%}" rel="stylesheet"> 
+    <link href="{% static 'assets/css/hover-min.css'%}"    rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'assets/images/fav.png'%}"/>
+    <link href="{% static 'assets/css/stylesheet.css'%}"    rel="stylesheet">
+    <title>Zakah&nbsp;|&nbsp;{{title}}</title>
+  </head>
+
+  <body>
+
+    <section class="main text-center">
+        <div class="overlay">
+            <div class="container">
+                {% block body %}
+                {% endblock %}
+            </div><!-- end container div-->
+        </div><!-- end overlay div-->
+    </section><!-- end main section-->
+
+        <!-- js files -->
+        <script src="{% static 'assets/js/bxlcommon.js'%}"></script>
+        <script src="{% static 'assets/js/bxlpos.js'%}"></script>
+         <script src="{% static 'assets/js/printer.js'%}"></script>
+
+        <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+        <script src="{% static 'assets/js/typed.min.js'%}"></script>
+        <script src="{% static 'assets/js/all.min.js'%}"></script>
+        <script src="{% static 'assets/js/anime.min.js'%}"></script>
+        <script src="{% static 'assets/js/main.js'%}"></script>
+
+    </body>
+</html>

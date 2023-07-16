@@ -1,0 +1,212 @@
+/* color #009146 */
+/* color #3c3c3c */
+.arabic-text{font-family: 'Tajawal', sans-serif;}
+.p{font-size: 1rem;font-weight: 700;}
+.english-text{font-family: 'Karla', sans-serif;}
+.dash-card{
+border: 0;
+border-radius: 27.5px;
+box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
+padding: 25px;
+max-height: 400px;
+overflow-y: auto;
+}
+#myfile{
+    display: none;
+  }
+#image{
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    color: #fff;
+    background: #009146;
+    border-radius: 50%;
+    line-height: 140px;
+    text-align: center;
+}
+
+.donate_logo{
+  border-radius: 50%;
+  border:2px solid #009146;
+  padding: 2px;
+}
+.save-btn{
+  background-color: #009146;
+  color: #fff;
+  padding: 7px 20px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.save-btn:hover{
+  color: #fff;
+}
+/* style checkbox */
+.app {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+
+article {
+  position: relative;
+  width: 140px;
+  height: 100px;
+  margin: 5px;
+  float: left;
+  border: 2px solid #009146;
+  box-sizing: border-box;
+  background-color: #eee
+}
+
+article div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 25px;
+  transition: .5s ease;
+  color:#3c3c3c
+}
+
+article input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ div {
+  background-color: #009146;
+  color: #fff;
+}
+
+.upgrade-btn {
+  display: block;
+  margin: 30px auto;
+  width: 200px;
+  padding: 10px 20px;
+  border: 2px solid #50bcf2;
+  border-radius: 50px;
+  color: #f5f5f5;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .3s ease;
+}
+
+.upgrade-btn:hover {
+  background-color: #50bcf2;
+}
+
+.blue-color {
+  color: #50bcf2;
+}
+
+.gray-color {
+  color: #555;
+}
+
+.social i:before {
+  width: 14px;
+  height: 14px;
+  position: fixed;
+  color: #fff;
+  background: #0077B5;
+  padding: 10px;
+  border-radius: 50%;
+  top:5px;
+  right:5px;
+}
+
+@keyframes slidein {
+  from {
+    margin-top: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin: 0%;
+    width: 100%;
+  }
+}
+.types{
+  background-color: #009146;
+  color: #fff;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  border-right: 2px solid #000;
+  position: relative;
+  box-sizing: border-box;
+}
+.delete_btn,.delete_char,.delete_dev,.delete_zakah{
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background: none;
+  border: none;
+  color: #fff;
+}
+.edit_char,.assign_dev,.edit_zakah{
+  border: none;
+  color: #fff;
+  margin-left: 20px;
+}
+.assign_dev:hover,.edit_char:hover,.edit_zakah:hover{
+  color: #fff;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #009146 !important;
+}
+.nav-pills  a{
+  color: #3c3c3c;
+}
+#alert-char-add-user,#alert-char-add-pass,
+#alert-char-ar-n,#alert-char-en-n,
+#alert-dev-name,#alert-dev-pass,
+#alert-devEdit-name,#alert-devEdit-pass,
+#alert-devEdit-char,#alert-devEdit-status,
+#alert-devEdit-sdate,#alert-devEdit-mdate,
+#alert-dateone,#alert-datetwo,#response,
+#alert-month,#response-monthYear,
+#alert-zakah_ar,#alert-zakah_en,
+#alert-Edit_zakah_ar,#alert-Eidit_zakah_en,
+#alert-DevN,#alert-OmanCity,#dispalymsg,
+#otheralert-zakah_en,#otheralert-zakah_ar,
+#otheralert-type,#alert-Deva,
+#alert-zakah_suben,#alert-zakah_subar,
+#alert-zakah_subexit,#alert-zakahsubexit,
+#alert-Edit_szakah_ar,#alert-Eidit_szakah_en,
+#alert-Eidit_szakah_exit,
+#warning-zakah_ar,#warning-zakah_en,
+#warning-addszakah_ex,#otheralert-subtype4charen,
+#otheralertexit-subtype4char,#otheralert-subtype4charar,
+#warning-Edit_szakah_ar4char,#warning-Eidit_szakah_en4char,
+#warning-Eidit_szakah_exit4ch,
+#warningadd-subzakah_ex4typeChar,#warningadd-subzakah_en4typeChar,
+#warningadd-subzakah_ar4typeChar,#alert-ondevdateone,
+#alert-ondevdatetwo,#alert-monthfilter4_Dev{
+  display: none;
+  padding: .5rem 1.25rem;
+}
+.inp_pass{
+  background: none;
+  border: none;
+  color: #fff;
+  width: 90px;
+}
+.filter-btn{
+  background: #009146;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff !important;
+}
+.addSub_zakah,.ViewSub_zaka4admin{
+  background: none;
+  border: none;
+  color: #fff;
+}

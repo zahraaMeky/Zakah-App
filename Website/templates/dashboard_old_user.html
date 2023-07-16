@@ -1,0 +1,636 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">
+            <span class="arabic-text">تسجيل الخروج </span> 
+            <i class="fas fa-sign-out-alt"  style="margin-left:10px;"></i>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" href="{%url 'charityPprofile'%}" style="color: #009146;">
+          <span class="arabic-text"> الملف التعريفى </span>
+          <i class="fas fa-user" style="margin-left:10px;"></i>
+        </a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+        <span class= 'arabic-text' style="margin-right: 10px;color: #009146;">{{charity_name}}</span>
+        <a class="navbar-brand" href="#">
+        {% if logo %}
+        <img class='donate_logo' src="{{logo}}" width="30" height="30">
+        {% else %}
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+        {% endif %}  
+        </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+    <!--content row-->
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="direction: rtl;">
+                <li class="nav-item">
+                    <a class="nav-link active arabic-text" id="contact-tab" data-toggle="tab" href="#content" role="tab" aria-controls="contact" aria-selected="false" style="color: #009146;">المحتوى</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link arabic-text" id="device-tab" data-toggle="tab" href="#device" role="tab" aria-controls="home" aria-selected="true" style="color: #009146;">الأجهزة</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link arabic-text" id="profile-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="profile" aria-selected="false" style="color: #009146;">الإحصائيات</a>
+                </li>
+              </ul>              
+        </div><!--div col-->
+    </div><!--row-->
+    <!--End content row-->
+        <div class="row  justify-content-center">
+          <div class="col-md-10">
+            <div class="card dash-card">
+                <!-- start model -->
+                <div class="row">
+                  <div class="col-md">
+                    <div class="modal fade"   id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-center arabic-text" id="exampleModalLabel" dir="rtl" >اضف نوع صدقة</h5>
+                            <button type="button" class="close closefmodal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row" id="modalbody">
+                     
+                            </div>
+                         
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" id='close-btn' class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                            <button type="button" class="btn btn-primary arabic-text add"  style="background-color: #009146; border: none;">حفظ</button>
+                            <div class="row"><!-- row for add other zakah type button -->
+                              <div class="col-md">
+                                <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="" data-trigger="hover">
+                                  <butaton data-dismiss="modal" class="btn otherzakah_btn  btn-primary arabic-text" data-toggle="modal" data-target="#ADDotherzakah" style="background-color: #009146;border: none;">
+                                    اضف نوع صدقة آخري
+                                  </button>
+                                </span>
+                              </div><!--col-md-->
+                            </div><!--row for add zakah  button-->
+                          </div>
+                        </div>
+                      </div>
+                    </div><!--model-->
+                  </div>
+                </div><!--row-->
+                <!-- End model -->
+     <!-- start  other Add Zakah model -->
+     <div class="row">
+      <div class="col-md">
+        <div class="modal fade"   id="ADDotherzakah" tabindex="-1" role="dialog" aria-labelledby="ADDzakahLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center arabic-text" id="ADDotherzakahLabel" dir="rtl" >اضف نوع صدقة آخري</h5>
+                <button type="button" id="close-otherzakah" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row" id="otherzakah">
+                  <div class="col-md">
+                      <div class="input-group mb-3" dir="rtl">
+                        <input type="text" id='otherzakah_ar' class="form-control" placeholder="اسم الصدقة بالعربية" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">
+                           <i class="fas fa-donate"></i>
+                          </span>
+                        </div>
+                      </div><!--user-->
+                      <!--message alert if empty-->
+                      <div id="otheralert-zakah_ar" class="alert alert-danger text-right arabic-text" role="alert">
+                            حقل اسم الصدقة بالعربية مطلوب 
+                      </div>
+                      <!--message alert if empty-->
+                      <div class="input-group mb-3" dir="rtl">
+                        <input type="text" id='otherzakah_en' class="form-control" placeholder="اسم الصدقة بالانجليزية" aria-label="pass" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">
+                           <i class="fas fa-donate"></i>
+                          </span>
+                        </div>
+                      </div><!--password-->
+                        <!--message alert if empty-->
+                        <div id="otheralert-zakah_en" class="alert alert-danger text-right arabic-text" role="alert">
+                          حقل اسم الصدقة بالانجليزية مطلوب 
+                    </div>
+                    <div id="otheralert-type" class="alert alert-danger text-right arabic-text" role="alert">
+                     نوع الصدقة موجود بالفعل
+                   </div>
+                    <!--message alert if empty-->
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="closeotherzakah" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                <button type="button" id="Addotherzakah" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+              </div>
+            </div>
+          </div>
+        </div><!--model-->
+      </div>
+    </div><!--row-->
+    <!-- End model -->
+                <!--Date model-->
+                    <!-- start model -->
+                    <div class="row">
+                      <div class="col-md">
+                        <div class="modal fade"   id="DateModal" tabindex="-1" role="dialog" aria-labelledby="DateModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-center arabic-text" id="DateModalLabel" dir="rtl" >اختر ما بين تاريخين </h5>
+                                <button type="button"  id='close-datebtn' class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="input-group mb-3" dir="rtl">
+                                    <input type="date" id="filterDateone"class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1">
+                                        <i class="far fa-calendar-alt"></i>
+                                      </span>
+                                    </div>
+                                </div><!--date s-->
+                                <!--message alert if empty-->
+                                   <div id="alert-dateone" class="alert alert-danger text-right arabic-text" role="alert">
+                                    حقل التاريخ مطلوب 
+                                   </div>
+                              <!--message alert if empty-->
+                                <div class="input-group mb-3" dir="rtl">
+                                  <input type="date" id="filterDatetwo"class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                      <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                  </div>
+                              </div><!--date s-->
+                                <!--message alert if empty-->
+                                <div id="alert-datetwo" class="alert alert-danger text-right arabic-text" role="alert">
+                                  حقل التاريخ مطلوب 
+                                 </div>
+                               <!--message alert if empty-->
+                               <!--response-->
+                                   <div id="response" class="alert alert-success text-right arabic-text" role="alert">
+                                     <span class="arabic-text">عدد التبرعات</span>
+                                     <span class="arabic-text between2Dates_num"></span>
+                                     <span class="arabic-text">مجموع التبرعات</span>
+                                     <span class="arabic-text between2Dates_numSum"></span>
+                                   </div>
+                                <!--response-->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                                <button type="button" id="search-date" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">ابحث</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!--model-->
+                      </div>
+                    </div><!--row-->
+                    <!-- End model -->
+                <!--end date model-->
+           
+               <!--month model-->
+<!-- start model -->
+<div class="row">
+  <div class="col-md">
+    <div class="modal fade"   id="monthModal" tabindex="-1" role="dialog" aria-labelledby="monthModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center arabic-text" id="monthModalLabel" dir="rtl" > اختر شهر</h5>
+            <button type="button"  id='close-monthYearbtn' class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">
+                      <i class="far fa-calendar-alt"></i>
+                    </label>
+                  </div>
+                    <select id='gMonth' class="custom-select arabic-text"   dir="rtl">
+                      <option value='' disabled selected hidden>--ابحث بالشهر--</option>
+                      <option value='1'>يناير</option>
+                      <option value='2'>فبراير</option>
+                      <option value='3'>مارس</option>
+                      <option value='4'>إبريل</option>
+                      <option value='5'>مايو</option>
+                      <option value='6'>يونيو</option>
+                      <option value='7'>يوليو</option>
+                      <option value='8'>أغسطس</option>
+                      <option value='9'>سبتمبر</option>
+                      <option value='10'>أكتوبر</option>
+                      <option value='11'>نوفمبر</option>
+                      <option value='12'>ديسمبر</option>
+                      </select> 
+                </div><!--month-->
+              </div><!--col-->
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">
+                      <i class="far fa-calendar-alt"></i>
+                    </label>
+                  </div>
+                  <select  id="yearSelect"  class="custom-select arabic-text"   dir="rtl">
+                    <option value ='' disabled selected hidden>...اختر سنة </option>
+                    {%for y in YEAR_CHOICES%}
+                    <option  value="{{y}}">{{y}}</option>
+                    {%endfor%}
+                    </select> 
+                </div><!--month-->
+              </div><!--col-->
+            </div><!--row-->
+           
+            <!--message alert if empty-->
+               <div id="alert-month" class="alert alert-danger text-right arabic-text" role="alert">
+                حقل الشهر مطلوب 
+               </div>
+          <!--message alert if empty-->
+           <!--response-->
+               <div id="response-monthYear" class="alert alert-success text-right arabic-text" role="alert">
+                 <span class="arabic-text">عدد التبرعات</span>
+                 <span class="arabic-text" id="betweenmonth_year"></span>
+                 <span class="arabic-text">مجموع التبرعات</span>
+                 <span class="arabic-text" id="between_monthYear_numSum"></span>
+               </div>
+            <!--response-->
+            </div>
+          <div class="modal-footer">
+            <button type="button" id="search-month" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">ابحث</button>
+          </div>
+        </div>
+      </div>
+    </div><!--model-->
+  </div><!--col-md-->
+  </div><!--row-->
+<!-- End model -->   
+
+<!--Start Edit Device name and city from charity (Model)-->
+<div class="row">
+  <div class="col-md">
+    <div class="modal fade"   id="EditDevice4CharModal" tabindex="-1" role="dialog" aria-labelledby="EditDevice4CharModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center arabic-text" id="EditDevN4charityModalLabel" dir="rtl" >  حدث بيانات الجهاز</h5>
+            <button type="button"  id='XcloseDevN_4Char' class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md">
+                <div class="input-group mb-3" dir="rtl">
+                  <input type="text" id='Edit_DveN4char' class="form-control" placeholder="اسم الجهاز" aria-label="Username" aria-describedby="basic-addon1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-laptop"></i>
+                    </span>
+                  </div>
+                </div><!--user-->
+                <!--message alert if empty-->
+                <div id="alert-DevN" class="alert alert-danger text-right arabic-text" role="alert">
+                      حقل اسم الجهاز مطلوب 
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">
+                      <i class="fas fa-city"></i>
+                    </label>
+                    <select  id="citySelect"  class="custom-select arabic-text"   dir="rtl">
+                      <option value ='' disabled selected >...اختر ولاية </option>
+                      {%for city in Oman_Cities%}
+                      <option  value="{{city}}">{{city}}</option>
+                      {%endfor%}
+                      </select> 
+                </div><!--city-->
+                <div class="input-group mb-3" dir="rtl">
+                  <input type="text" id='Edit_Dvea4char' class="form-control" placeholder="عنوان الجهاز" aria-label="Username" aria-describedby="basic-addon1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                  </div>
+                </div><!--address-->
+                <!--message alert if empty-->
+                <div id="alert-Deva" class="alert alert-danger text-right arabic-text" role="alert">
+                      حقل عنوان الجهاز مطلوب 
+                </div>
+              </div><!--col-->
+            </div><!--row-->
+            <!--message alert if empty-->
+               <div id="alert-OmanCity" class="alert alert-danger text-right arabic-text" role="alert">
+                حقل الولاية مطلوب 
+               </div>
+          <!--message alert if empty-->
+          <div id = "dispalymsg" class="alert alert-danger text-right arabic-text" role="alert">
+           !الجهاز موجود بالفعل
+          </div>
+          <!--end check message -->
+            </div>
+          <div class="modal-footer">
+            <button type="button" id="devX" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+            <button type="button" id="Edit_dev_N" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">تحديث</button>
+          </div>
+        </div>
+      </div>
+    </div><!--model-->
+  </div><!--col-md-->
+  </div><!--row-->
+<!--End Edit Device name and city from charity (Model)-->
+                <!--content-->
+                <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+                  <div class="row"><!-- row for add zakah type button -->
+                    <div class="col-md">
+                      <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="اضف نوع صدقة" data-trigger="hover">
+                        <butaton class="btn add_btn" data-toggle="modal" data-target="#exampleModal">
+                          <i class="fas fa-plus-circle fa-2x" style="color: #009146;"></i>
+                        </button>
+                      </span>
+                    </div><!--col-md-->
+                  </div><!--row for add zakah  button-->
+                  <div class="row d-flex justify-content-end">
+                       {%for type in charit_types_list%}
+                       <div class="col-md-4">
+                           <div class="types mb-3" data-value="{{type.type_en}}">
+                            <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="احذف نوع صدقة" data-trigger="hover">
+                              <button class="delete_btn" value="{{type.type_en}}"><i class="fas fa-trash"></i></button>
+                            </span>
+                              <p class="text-center english-text" style="margin-bottom: 0;">{{type.type_en}}</p>
+                              <p class="text-center arabic-text"  style="margin-bottom: 0;">{{type.type_ar}}</p>
+                              <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="اضف نوع صدقة فرعية" data-trigger="hover">
+                              <button class="btn" id="szakah4charity" data-toggle="modal" data-target="#addsubzakah4charity" value="{{type.type_en}}">
+                                <i class="fas fa-plus" style="color: #fff;"></i>
+                              </button>
+                              </span>
+                            
+                                <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="عرض الصدقات فرعية" data-trigger="hover">
+                                  <form id="par-form" action="{%url 'subzakah4charity'%}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="name">
+                                  <button type="submit" class="btn visitUrl" value="{{type.type_en}}">
+                                    <i class="fas fa-eye" style="color: #fff;"></i>
+                                  </button>
+                                  </span>
+                                </form>
+                           </div><!--types-->
+                         
+                       </div><!--col-->
+                       {%endfor%}
+                   </div><!--row-->
+                </div>
+                <!--content-->
+                <!--device-->
+                <div class="tab-pane fade pt-5" id="device" role="tabpanel" aria-labelledby="device-tab">
+                  <!--Start New Row form Jquery-->
+                  <div class="row d-flex justify-content-end" id="rowfromjquery"></div>
+                  <!--ENd New Row form Jquery-->
+                </div>
+                <!--device-->
+                <!--statistics-->
+                <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="filters py-3">
+                      <a class="arabic-text filter-btn btn" id="2date_btn" data-toggle="modal" data-target="#DateModal"> البحث بالتاريخ</a>
+                      <a class="arabic-text filter-btn btn" id="month_btn" data-toggle="modal" data-target="#monthModal"> البحث بالشهر</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text" id="pills-details-tab" data-toggle="pill" href="#Details" role="tab" aria-controls="Details" aria-selected="false">تفاصيل</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link  arabic-text" id="pills-day-tab" data-toggle="pill" href="#pills-year" role="tab" aria-controls="pills-year" aria-selected="true">السنة</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text" id="pills-profile-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="false">الشهر</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text active" id="pills-contact-tab" data-toggle="pill" href="#pills-day" role="tab" aria-controls="pills-day" aria-selected="false">اليوم</a>
+                      </li>
+                    </ul>
+                  </div><!--row-->
+                  <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                      <p  class="text-center arabic-text">إجمالى الإحصائيات</p>
+                    </div>
+                  </div><!--end row-->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-day" role="tabpanel" aria-labelledby="pills-day-tab">
+                          <div class="types p-3 mb-3" style="background-color: #009146;color: #fff;">
+                            {%for x in OneDay_tarns_Num%}
+                             <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                               {{x}}
+                            </p>
+                            {% empty %}
+                            <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                              لا يوجد إحصائيات 
+                            </p>
+                            {%endfor%} 
+                          </div><!--content-->
+                        </div>
+                        <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+                          <div class="types p-3" style="background-color: #009146;color: #fff;">
+                            {%for x in Onemonth_tarns_Num%}
+                            <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                              {{x}}
+                           </p>
+                           {% empty %}
+                           <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                             لا يوجد إحصائيات 
+                           </p>
+                           {%endfor%} 
+                         </div><!--content-->
+                        </div>
+                        <div class="tab-pane fade" id="pills-year" role="tabpanel" aria-labelledby="pills-year-tab">
+                          <div class="types p-3" style="background-color: #009146;color: #fff;">
+                            {%for x in Oneyear_tarns_Num%}
+                            <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                              {{x}}
+                           </p>
+                           {% empty %}
+                           <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                             لا يوجد إحصائيات 
+                           </p>
+                           {%endfor%}
+                         </div><!--content-->
+                        </div>
+
+                        <div class="tab-pane fade" id="Details" role="tabpanel" aria-labelledby="pills-details-tab">
+                          <div class="row d-flex justify-content-end">    
+                          
+                        {% for donation in donation_by_type %}
+                            <div class="col-md-4">
+                              <div class="types p-3" style="background-color: #009146;color: #fff;height: 125px;">
+                                <p class="text-center arabic-text">{{ donation.type }}</p>
+                                <p class="text-center arabic-text">
+                                  <span>محموع التبرعات</span>
+                                  <span> {{ donation.money }}</span>
+                                 
+                                </p>
+                              </div><!--content-->
+                            </div>
+                            {% endfor %}
+                          </div>
+                          
+                        </div>
+
+
+                      </div>
+                    </div><!--col-md-8-->
+                    <div class="col-md-4">
+                        <div class="types p-3" style="background-color: #009146;color: #fff;">
+                          <p class="text-center english-text" style="margin-bottom: 0;">
+                            {{Donate_Num}}
+                          </p>
+                           <p class="text-center arabic-text" style="margin-bottom: 0;">
+                           عدد المتبرعين
+                          </p>
+                           <p class="text-center english-text"  style="margin-bottom: 0;">
+                            {{sum}}
+                          </p>
+                          <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                            مجموع التبرعات
+                          </p>
+                        </div><!--types-->
+                    </div><!--col-->
+                  </div><!--row-->
+               </div>
+              </div><!--"tab-content-->
+              <!--statistics-->       
+            </div><!--card-->
+          </div><!--col-->
+        </div><!--first row-->
+        <!--start modal for add subzakah 4 charity-->
+        <div class="row">
+          <div class="col-md">
+            <div class="modal fade"   id="addsubzakah4charity" tabindex="-1" role="dialog" aria-labelledby="addsubzakah4charityLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-center arabic-text" id="addsubzakah4charityLabel" dir="rtl" >اضف نوع صدقة فرعية</h5>
+                    <button type="button" id="close-chsubzakah" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body row" id="subz4charadd">
+                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="closechazakah" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                    <button type="button" id="Addchazakah" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+                    <button type="button" id="Addotherchasubzakah" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;" data-toggle="modal" data-target="#Addothersubzakah4charModal">اضف نوع فرعي أخر</button>
+                  </div>
+                </div>
+              </div>
+            </div><!--model-->
+          </div>
+        </div><!--row-->
+        <!--End modal for add subzakah 4 charity-->
+
+        <!-- start Add Other Subzakah-->
+        <div class="row">
+          <div class="col-md">
+            <form method="post" action="{%url 'addothersub4char'%}" id="addothersubz_form">
+              {% csrf_token %}
+            <div class="modal fade"   id="Addothersubzakah4charModal" tabindex="-1" role="dialog" aria-labelledby="Addothersubzakah4charModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-center arabic-text" id="Addothersubzakah4charModalLabel" dir="rtl" >اضف نوع صدقة فرعيةآخري</h5>
+                    <button type="button" id="close-otherszakah4ch" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row" id="otherzakah">
+                      <div class="col-md">
+                        <input type="hidden" id="setothersubzakah" name="zakName">
+                          <div class="input-group mb-3" dir="rtl">
+                            <input type="text" id='othersub4charzakah_ar' class="form-control" placeholder="اسم الصدقة بالعربية" name="othersub4charar">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                               <i class="fas fa-donate"></i>
+                              </span>
+                            </div>
+                          </div><!--user-->
+                          <!--message alert if empty-->
+                          <div id="otheralert-subtype4charar" class="alert alert-danger text-right arabic-text" role="alert">
+                                حقل اسم الصدقة بالعربية مطلوب 
+                          </div>
+                          <!--message alert if empty-->
+                          <div class="input-group mb-3" dir="rtl">
+                            <input type="text" id='othersub4charzakah_en' class="form-control" placeholder="اسم الصدقة بالانجليزية" name="othersub4charen">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                               <i class="fas fa-donate"></i>
+                              </span>
+                            </div>
+                          </div><!--password-->
+                            <!--message alert if empty-->
+                            <div id="otheralert-subtype4charen" class="alert alert-danger text-right arabic-text" role="alert">
+                              حقل اسم الصدقة بالانجليزية مطلوب 
+                        </div>
+                        <div id="otheralertexit-subtype4char" class="alert alert-danger text-right arabic-text" role="alert">
+                         نوع الصدقة موجود بالفعل
+                       </div>
+                        <!--message alert if empty-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="closeothersubzakah4char" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;">اغلاق</button>
+                    <button type="submit" id="Addothersubzakah4char" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">حفظ</button>
+                  </div>
+                </div>
+              </div>
+            </div><!--model-->
+            </form>
+          </div>
+        </div><!--row-->
+        <!-- End Add Other Subzakah-->
+    </div><!--container-->
+  </main>
+  <script>
+    //set today date into input type date value 
+    const filterDateone = document.getElementById('filterDateone');
+    filterDateone.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+
+    const filterDatetwo = document.getElementById('filterDatetwo');
+    filterDatetwo.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+  </script>
+  {%endblock%}

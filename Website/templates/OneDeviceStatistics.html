@@ -1,0 +1,331 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">
+            <span class="arabic-text">تسجيل الخروج </span> 
+            <i class="fas fa-sign-out-alt"  style="margin-left:10px;"></i>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" href="{%url 'charityPprofile'%}" style="color: #009146;">
+          <span class="arabic-text"> الملف التعريفى </span>
+          <i class="fas fa-user" style="margin-left:10px;"></i>
+        </a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+        <span class= 'arabic-text' style="margin-right: 10px;color: #009146;">{{charity_name}}</span>
+        <a class="navbar-brand" href="#">
+        {% if logo %}
+        <img class='donate_logo' src="{{logo}}" width="30" height="30">
+        {% else %}
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+        {% endif %}  
+        </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+    <!--content row-->
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="direction: rtl;">
+                <li class="nav-item">
+                    <a class="nav-link arabic-text active" id="profile-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="profile" aria-selected="false" style="color: #009146;">إحصائيات الجهاز {{device_name}}</a>
+                </li>
+              </ul>              
+        </div><!--div col-->
+    </div><!--row-->
+    <!--End content row-->
+        <div class="row  justify-content-center">
+          <div class="col-md-10">
+            <div class="card dash-card">
+              <div class="row">
+                <div class="col-md">
+                  <div class="filters py-3">
+                    <span class="d-inline-block" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="الرجوع للخلف" data-trigger="hover">
+                      <a href="{%url 'dashboardOld' %}"class="btn" >
+                        <i class="fas fa-fast-backward fa-lg"></i>
+                      </a>
+                    </span>
+                  <a class="arabic-text filter-btn btn" id="oneDev2date_btn" data-toggle="modal" data-target="#ondevDateModal"> البحث بالتاريخ</a>
+                  <a class="arabic-text filter-btn btn" id="oneDevmonth_btn" data-toggle="modal" data-target="#monthModalOneDev"> البحث بالشهر</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <div class="tab-content" id="statisTabContent">
+                  <div class="row">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text" id="pills-details-tab" data-toggle="pill" href="#Details" role="tab" aria-controls="Details" aria-selected="false">تفاصيل</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link  arabic-text" id="pills-day-tab" data-toggle="pill" href="#pills-year" role="tab" aria-controls="pills-year" aria-selected="true">السنة</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text" id="pills-profile-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="false">الشهر</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link arabic-text active" id="pills-contact-tab" data-toggle="pill" href="#pills-day" role="tab" aria-controls="pills-day" aria-selected="false">اليوم</a>
+                      </li>
+                    </ul>
+                  </div><!--row-->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                  <p  class="text-center arabic-text">إجمالى الإحصائيات</p>
+                </div>
+              </div><!--end row-->
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-day" role="tabpanel" aria-labelledby="pills-day-tab">
+                      <div class="types p-3 mb-3" style="background-color: #009146;color: #fff;">
+                        {%for x in OneDay_tarns_Num%}
+                         <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                           {{x}}
+                        </p>
+                        {% empty %}
+                        <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                          لا يوجد إحصائيات 
+                        </p>
+                        {%endfor%} 
+                      </div><!--content-->
+                    </div>
+                
+
+                    <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+                      <div class="types p-3" style="background-color: #009146;color: #fff;">
+                        {%for x in Onemonth_tarns_Num%}
+                        <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                          {{x}}
+                       </p>
+                       {% empty %}
+                       <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                         لا يوجد إحصائيات 
+                       </p>
+                       {%endfor%} 
+                     </div><!--content-->
+                    </div>
+                    <div class="tab-pane fade" id="pills-year" role="tabpanel" aria-labelledby="pills-year-tab">
+                      <div class="types p-3" style="background-color: #009146;color: #fff;">
+                        {%for x in Oneyear_tarns_Num%}
+                        <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                          {{x}}
+                       </p>
+                       {% empty %}
+                       <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                         لا يوجد إحصائيات 
+                       </p>
+                       {%endfor%}
+                     </div><!--content-->
+                    </div>
+
+                    <div class="tab-pane fade" id="Details" role="tabpanel" aria-labelledby="pills-details-tab">
+                      <div class="row d-flex justify-content-end">    
+                      
+                    {% for donation in donation_by_type %}
+                        <div class="col-md-4">
+                          <div class="types p-3" style="background-color: #009146;color: #fff;height: 125px;">
+                            <p class="text-center arabic-text">{{ donation.type }}</p>
+                            <p class="text-center arabic-text">
+                              <span>مجموع التبرعات</span>
+                              <span> {{ donation.money }}</span>
+                             
+                            </p>
+                          </div><!--content-->
+                        </div>
+                        {% endfor %}
+                      </div>
+                      
+                    </div>
+
+
+                  </div>
+                </div><!--col-md-8-->
+                <div class="col-md-4">
+                    <div class="types p-3" style="background-color: #009146;color: #fff;">
+                      <p class="text-center english-text" style="margin-bottom: 0;">
+                        {{donation_Count}}
+                      </p>
+                       <p class="text-center arabic-text" style="margin-bottom: 0;">
+                       عدد المتبرعين
+                      </p>
+                       <p class="text-center english-text"  style="margin-bottom: 0;">
+                        {{total_sum}}
+                      </p>
+                      <p class="text-center arabic-text"  style="margin-bottom: 0;">
+                        مجموع التبرعات
+                      </p>
+                    </div><!--types-->
+                </div><!--col-->
+              </div><!--row-->
+            </div><!--card-->
+          </div><!--col-->
+        </div><!--first row-->
+        <!--Date model-->
+          <!-- start model -->
+          <div class="row">
+            <div class="col-md">
+              <div class="modal fade"   id="ondevDateModal" tabindex="-1" role="dialog" aria-labelledby="DateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-center arabic-text" id="DateModalLabel" dir="rtl" >اختر ما بين تاريخين </h5>
+                      <button type="button"  id='close-datebtn4onedev' class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="hidden" id="devID" value={{Device_ID}}>
+                      <label class="arabic-text text-right" dir="rtl">تاريخ البداية</label>
+                      <div class="input-group mb-3" dir="rtl">
+                          <input type="date" name="s4devDate" id="filterDateone4dev"class="form-control">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                      </div><!--date s-->
+                      <!--message alert if empty-->
+                          <div id="alert-ondevdateone" class="alert alert-danger text-right arabic-text" role="alert">
+                          حقل التاريخ مطلوب 
+                          </div>
+                    <!--message alert if empty-->
+                    <label class="arabic-text text-right" dir="rtl">تاريخ النهاية</label>
+                      <div class="input-group mb-3" dir="rtl">
+                        <input type="date" name="e4devDate" id="filterDatetwo4dev"class="form-control" aria-label="pass" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">
+                            <i class="far fa-calendar-alt"></i>
+                          </span>
+                        </div>
+                    </div><!--date s-->
+                      <!--message alert if empty-->
+                      
+                      <div id="alert-ondevdatetwo" class="alert alert-danger text-right arabic-text" role="alert">
+                        حقل التاريخ مطلوب 
+                        </div>
+                        <div id="filterresponse">
+                        
+                        </div>
+                    
+                      <!--response-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary arabic-text" data-dismiss="modal" style="background-color: #009146;border: none;display: none;" >اغلاق</button>
+                      <button type="button" id="search2dates4oneDev" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">ابحث</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!--model-->
+            </div>
+          </div><!--row-->
+          <!-- End model -->
+        <!--end date model-->
+           
+        <!--month model-->
+                    <!-- start model -->
+                    <div class="row">
+                      <div class="col-md">
+                        <div class="modal fade"   id="monthModalOneDev" tabindex="-1" role="dialog" aria-labelledby="DateModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title text-center arabic-text" id="monthModalLabel" dir="rtl" > اختر شهر</h5>
+                                <button type="button"  id='close-monthYearbtn4onedev' class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <input type="hidden" id="devID4month" value={{Device_ID}}>
+                                <div class="row">
+                                  <div class="col-6">
+                                    <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">
+                                          <i class="far fa-calendar-alt"></i>
+                                        </label>
+                                      </div>
+                                        <select id='gMonth4dev' class="custom-select arabic-text"   dir="rtl">
+                                          <option  selected value="">--ابحث بالشهر--</option>
+                                          <option value='1'>يناير</option>
+                                          <option value='2'>فبراير</option>
+                                          <option value='3'>مارس</option>
+                                          <option value='4'>إبريل</option>
+                                          <option value='5'>مايو</option>
+                                          <option value='6'>يونيو</option>
+                                          <option value='7'>يوليو</option>
+                                          <option value='8'>أغسطس</option>
+                                          <option value='9'>سبتمبر</option>
+                                          <option value='10'>أكتوبر</option>
+                                          <option value='11'>نوفمبر</option>
+                                          <option value='12'>ديسمبر</option>
+                                          </select> 
+                                    </div><!--month-->
+                                  </div><!--col-->
+                                  <div class="col-6">
+                                    <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">
+                                          <i class="far fa-calendar-alt"></i>
+                                        </label>
+                                      </div>
+                                      <select  id="yearSelect4Dev"  class="custom-select arabic-text"   dir="rtl">
+                                        <option value="" selected >...اختر سنة </option>
+                                        {%for y in YEAR_CHOICES%}
+                                        <option  value="{{y}}">{{y}}</option>
+                                        {%endfor%}
+                                        </select> 
+                                    </div><!--month-->
+                                  </div><!--col-->
+                                </div><!--row-->
+                               
+                                <!--message alert if empty-->
+                                   <div id="alert-monthfilter4_Dev" class="alert alert-danger text-right arabic-text" role="alert">
+                                    حقل الشهر والسنة مطلوب 
+                                   </div>
+                              <!--message alert if empty-->
+                               <!--response-->
+                                   <div id="filterresponse4month" class="text-right arabic-text">
+                                 
+                                   </div>
+                                <!--response-->
+                                </div>
+                              <div class="modal-footer">
+                                <button type="button" id="search-month4onedev" class="btn btn-primary arabic-text"  style="background-color: #009146; border: none;">ابحث</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!--model-->
+                      </div>
+                    </div><!--row-->
+                    <!-- End model -->
+                <!--end date model-->
+    </div><!--container-->
+  </main>
+  <script>
+    //set today date into input type date value 
+    const filterDateone = document.getElementById('filterDateone');
+    filterDateone.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+
+    const filterDatetwo = document.getElementById('filterDatetwo');
+    filterDatetwo.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+  </script>
+  {%endblock%}

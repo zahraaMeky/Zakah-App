@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+
+<div>
+						<input type="hidden" class="text form-control" id="p_result" />
+						<input type="hidden" class="text form-control" id="p_name" value="Printer1" />
+    <button id="print_bt" class="ripple" style="margin-top:15px" onclick="PrintReceipt(20);"> Print receipt </button>
+</div>
+
+{% endblock %}

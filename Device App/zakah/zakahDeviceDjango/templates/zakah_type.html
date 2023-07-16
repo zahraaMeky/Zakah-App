@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                        <!-- <a class='hvr-grow' href="javascript:history.go(-1)"> -->
+                        <a class='hvr-grow' href="{% url 'index' %}">
+                            <i class="fas fa-arrow-alt-circle-left fa-3x" style="color: #212529;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="zakah_logo" class="mb-4">
+                                    <img class="img-fluid" src="{{charity.logo}}" width="150" height="150"> 
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain image)-->
+             
+                        </div><!-- end row div (internal row inside col-10)row one-->
+                     
+                         <!--start second row-->
+                        <div class="row">
+                            <div class="col">
+                                <div class="zakah_heading mb-4">
+                                   <span class="english-heading"> Donate Type<span>
+                                    <span class="arabic-heading">نوع التبرع<span>
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain heading)-->
+                        </div><!-- end row div (internal row inside col-10)row 2-->             
+                        <!--start third row-->
+                         <div class="row" >
+                            {%for type in types_of_zakah %}
+                            <div class="col-md-4">
+                                <form  method="POST"  action="{%url 'sub_type'%}">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{type.type_id}}" name="slug">
+                                    <button type="submit" style="background:none;border: none;">
+                                        <div class="card mb-3 zakah-type" class="card border-left-one shadow py-2" style="width:18rem;">
+                                            <div class="row g-0">
+                                              <div class="col-md-2">
+                                                <img src="{% static 'assets/images/walet.png'%}"class="img-fluid" style="margin-top: 15px;">
+                                              </div>
+                                              <div class="col-md-8">
+                                                <div class="card-body">
+                                                  <h5 class="card-title arabic-span">{{type.type_ar}}</h5>
+                                                  <p class="card-text english-span">{{type.type_en}}</p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </button>           
+                                </form>
+                            </div><!-- End col-2 (one)(contain icon)-->   
+                            {%endfor%} 
+                       </div><!-- end row div (internal row inside col-10)row one-->
+                    </div><!-- end col-10 div-->
+                </div><!-- end row div-->
+
+<script>
+
+    window.setTimeout(function(){
+      window.location.href = "{%url 'index'%}";
+    }, 600000);
+
+</script>
+
+{% endblock %}   

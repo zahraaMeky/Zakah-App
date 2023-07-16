@@ -1,0 +1,8 @@
+Admin
+userName:admin 
+password:admin
+
+
+Charity
+userName:ataa
+pasword:ataa

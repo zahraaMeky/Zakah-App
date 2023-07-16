@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Roboto_B;
+    src: url('../fonts/Roboto-Bold.ttf');
+  }
+  @font-face {
+    font-family: Roboto_R;
+    src: url('../fonts/Roboto-Regular.ttf');
+  }
+  @font-face {
+    font-family:Tajawal_B;
+    src: url('../fonts/Tajawal-Bold.ttf');
+  }
+  @font-face {
+    font-family: Tajawal_R;
+    src: url('../fonts/Tajawal-Regular.ttf');
+  }

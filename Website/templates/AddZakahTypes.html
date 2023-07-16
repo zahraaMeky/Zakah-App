@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <li class="nav-item">
+          <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">تسجيل خروج</a>
+        </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #009146;">{{username}}</a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+      <a class="navbar-brand" href="#">
+        {% if logo %}
+        <img class='donate_logo' src="{{logo}}" width="30" height="30">
+        {% else %}
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+        {% endif %}  
+      </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+      <h3 class="arabic-text text-center mb-4" style="color:#212529 ;">اضف بيانات أنواع الزكاة </h3>
+      <form method="post">{% csrf_token %}
+        <div class="card dash-card">
+        <div class="row justify-content-center">
+          <!-- start col-1-->
+          {%for type in types%}
+          <div class="col">
+            <section class="app text-center">
+              <article class="feature1">
+                <input type="checkbox" id="feature1" name='zakah' value=" {{type.name_en}}, {{type.name_ar}} "/>
+                <div>
+                  <span>
+                   <p class="english-text" style="margin-bottom: 0;">{{type.name_en}}</p>
+                   <p class="arabic-text" style="margin-bottom: 0;">{{type.name_ar}}</p>
+                  </span>
+                </div>
+              </article>
+              </section>
+          </div><!--div col-1-->
+          <!-- End col-1-->
+          {%endfor%}
+        </div><!--row-1-->
+      </div><!--div card-->
+       <!--sart row-2-->
+       <div class="row  justify-content-center">
+        <div class="form-group">
+          <input type="submit" class="btn save-btn" value="حفظ البيانات ">
+        </div>
+      </div><!--row-2-->
+      </form>
+    </div>
+  </main>
+  {%endblock%}

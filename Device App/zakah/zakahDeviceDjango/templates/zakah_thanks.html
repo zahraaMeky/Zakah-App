@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+            <div class="row justify-content-start">
+                <div class="col-2">
+                   <a class='hvr-grow' href="{% url 'index' %}">
+                            <i class="fas fa-arrow-alt-circle-left fa-3x" style="color: #212529;"></i>
+                   </a>
+                </div>
+            </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-10">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="zakah_logo">
+                                    <img class="img-fluid" src="{{logo}}" width="150" height="150">
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain image)-->
+                        </div><!-- end row div (internal row inside col-10)row one-->
+                        <div class="mb-3"></div>
+                         <!--start second row-->
+                        <div class="row">
+                            <div class="col">
+                                <div class="zakah_heading">
+                                    <span class="english-heading" style="color: #212529">Done successfully<span>
+                                    <span class="arabic-heading" style="color: #212529">تمت العملية بنجاح<span>
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain heading)-->
+                        </div><!-- end row div (internal row inside col-10)row 2-->
+                        <div class="mb-3"></div>
+                        <!--start third row-->
+                        <div class="row" >
+                            <div class="col-12"> 
+                                <h1 class="ml4">
+                                    <span class="letters letters-1"  style="color: #212529">شكرا فى ميزان حسناتك</span>
+                                    <span class="letters letters-2" style="color: #212529">Thanks In Your Favor</span>
+                                  </h1>
+                            </div><!-- End col-2 (one)(contain icon)-->
+                            </div><!--end row-->
+                            <div class="my-5"></div>
+                            <div class="row d-flex justify-content-center">
+                            <!--col 4-->
+                            <div class="col-2">
+                                <div class="zakah_hand">
+                                    <img class="img-fluid" src="{% static 'assets/images/hand.png'%}">
+                                </div><!-- end zakah_logo div-->
+                            </div><!-- end col-2 div (contain image)-->
+                        </div><!-- end row div (internal row inside col-10)row one-->   
+                    </div><!-- end row div (internal row inside col-10)row one-->
+                    <!--End second row-->
+                    </div><!-- end col-10 div-->
+                </div><!-- end row div-->
+ <!--javaScript Code to open index.html page after 3 second -->
+         <script src="../static/assets/js/bxlcommon.js"></script>
+         <script src="../static/assets/js/bxlpos.js"></script>
+         <script src="../static/assets/js/printer.js"></script>
+ <script>
+
+    // PrintReceipt_ar({{charity.name_ar}} , {{money}}, {{type}}, {{id}});
+    PrintReceipt("{{name}}" , {{money}}, "{{tr_id}}", "{{type}}" , "{{phone}}", "{{website}}", "{{datetime}}");
+
+    window.setTimeout(function(){
+      window.location.href = "{%url 'index'%}";
+    }, 5000);
+
+  </script>       
+{% endblock %}   
+
+

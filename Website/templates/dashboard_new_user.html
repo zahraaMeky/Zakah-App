@@ -1,0 +1,101 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block body%}
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link arabic-text" href="{%url 'logout'%}" style="color: #009146;">
+          <span class="arabic-text">تسجيل الخروج </span> 
+          <i class="fas fa-sign-out-alt"  style="margin-left:10px;"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #009146;">{{username}}</a>
+      </li> 
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+      <a class="navbar-brand" href="#">
+        <img class='donate_logo' src="{%static 'assets/images/donate_logo.png'%}" width="30" height="30">
+      </a>
+    </span>
+  </div>
+</div><!--container-->
+</nav>
+<!--end navbar-->
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+      <h3 class="arabic-text text-center mb-4" style="color:#212529 ;">اضف بيانات لجنة الزكاة</h3>
+      <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="row  justify-content-center">
+          <div class="col-md-5">
+            <div class="card dash-card" style="height: 250px;">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i style="color: #009146;" class="fas fa-file-signature"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="اسم اللجنة بالعربية " name="namear" style="text-align: right;" required oninvalid="this.setCustomValidity('هذا الحقل مطلوب ')"
+                oninput="setCustomValidity('')">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fas fa-file-signature" style="color: #009146;"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="اسم اللجنة بالانجليزية " name="nameen" style="text-align: right;" >
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i style="color: #009146;" class="far fa-envelope"></i></span>
+                </div>
+                <input type="email" class="form-control" placeholder="البريد الالكترونى" name="email" style="text-align: right;">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i style="color: #009146;" class="fab fa-internet-explorer"></i></span>
+                </div>
+                <input type="url" class="form-control" placeholder="الموقع الالكترونى" name="web" style="text-align: right;">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i style="color: #009146;" class="fas fa-phone-alt"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="رقم الهاتف" name="phone" style="text-align: right;" required oninvalid="this.setCustomValidity('هذا الحقل مطلوب ')"
+                oninput="setCustomValidity('')">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i style="color: #009146;" class="fas fa-map-marker"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="المنظقة" name="city" style="text-align: right;" required oninvalid="this.setCustomValidity('هذا الحقل مطلوب ')"
+                oninput="setCustomValidity('')">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="card dash-card text-center" style="height: 250px;">
+              <div class="form-group">
+                <label for="exampleFormControlFile1" id="image"><i  class="fas fa-images fa-3x"></i></label>
+                <input type="file" id="myfile" name="img" accept="image/*" class="form-control-file">
+              </div>
+              <div class="text-body">
+                <p class="card-text arabic-text p" style="margin-bottom: 0;">اضغط لرفع الشعار</p>
+                <p class="card-text english-text p">Upload Logo</p>
+              </div>
+              </div>
+         </div>
+        </div><!--first row-->
+        <div class="row  justify-content-center">
+          <div class="form-group">
+            <input type="submit" class="btn save-btn" value="حفظ البيانات ">
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+  {%endblock%}

@@ -1,0 +1,343 @@
+a{text-decoration: none;color: #FFF;}
+a:hover{color: #FFF;}
+.main{
+  position: relative;
+  background-image: url('../images/surah.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  color: #FFF;
+  height: 100vh;
+}
+
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(199, 236, 238,0.7); 
+  padding-top: 80px;
+  padding-bottom: 80px;
+  /* background: rgba(0, 145, 70,.9); */
+}
+.arabic-para{
+    font-family:Tajawal_B;
+    font-size: 40px;
+    font-weight: 700; 
+    direction: rtl;
+    color: #212529;
+
+}
+.para-English{  
+    font-family: Roboto_B;
+    font-size: 35px;
+    font-weight:800; 
+    text-transform: uppercase;
+    direction: ltr;
+    color: #212529;
+}
+.zakah-type{
+  border-right: .25rem solid #1cc88a !important
+}
+.shadow {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+/*style donate button*/
+/* only animate if the device supports hover */
+@media (hover: hover) {
+  #creditcard {
+    /*  set start position */
+    transform: translateY(110px);
+    transition: transform 0.1s ease-in-out;
+    /*  set transition for mouse enter & exit */
+  }
+
+  #money {
+    /*  set start position */
+    transform: translateY(180px);
+    transition: transform 0.1s ease-in-out;
+    /*  set transition for mouse enter & exit */
+  }
+
+  .button-arabic:hover #creditcard {
+    transform: translateY(0px);
+    transition: transform 0.2s ease-in-out;
+    /*  overide transition for mouse enter */
+  }
+
+  .button-arabic:hover #money {
+    transform: translateY(0px);
+    transition: transform 0.3s ease-in-out;
+    /*  overide transition for mouse enter */
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.25rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.button-arabic:hover .button__text span {
+  transform: translateY(-0.25rem);
+  transition: transform .2s ease-in-out;
+}
+
+/* styling */
+.button-arabic {
+  border: none;
+  outline: none;
+  padding: 1rem 90px 1rem 90px;
+  position: relative;
+  border-radius: 8px;
+  letter-spacing: 0.7px;
+  background-color: #009146;
+  color: #fff;
+  font-size: 21px;
+  cursor: pointer;
+  box-shadow: rgba(0, 9, 61, 0.2) 0px 4px 8px 0px;
+  font-family: Tajawal_R;
+}
+
+.button-arabic:active {
+  transform: translateY(1px);
+}
+
+.button__svg {
+  position: absolute;
+  overflow: visible;
+  bottom: 6px;
+  left: -2rem;
+  height: 140%;
+}
+/*English button Donate*/
+.button:hover #creditcard {
+  transform: translateY(0px);
+  transition: transform 0.2s ease-in-out;
+  /*  overide transition for mouse enter */
+}
+
+.button:hover #money {
+  transform: translateY(0px);
+  transition: transform 0.3s ease-in-out;
+  /*  overide transition for mouse enter */
+}
+
+
+@keyframes bounce {
+0% {
+  transform: translateY(0);
+}
+50% {
+  transform: translateY(-0.25rem);
+}
+100% {
+  transform: translateY(0);
+}
+}
+
+.button:hover .button__text span {
+transform: translateY(-0.25rem);
+transition: transform .2s ease-in-out;
+}
+
+/* styling */
+.button {
+border: none;
+outline: none;
+padding: 1rem 50px 1rem 70px;
+position: relative;
+border-radius: 8px;
+letter-spacing: 0.7px;
+background-color: #009146 ;
+color: #fff;
+font-size: 21px;
+font-family:  Roboto_R;
+cursor: pointer;
+box-shadow: rgba(0, 9, 61, 0.2) 0px 4px 8px 0px;
+}
+
+.button:active {
+transform: translateY(1px);
+}
+/*End Style donate button*/
+/*start style zakah_type page*/
+
+.english-span{
+  font-family:Roboto_R;
+  text-transform: capitalize;
+  font-weight:600;
+  color: #212529;
+}
+.arabic-span{
+  font-family:Tajawal_R;
+  color: #212529;
+  font-weight:600;
+}
+.zakah_heading span{
+  font-weight: 700;
+  font-size: 30px;
+  margin-left: 15px;
+  display: inline-block;
+  color: #212529;
+}
+.zakah_heading .arabic-heading,.arabic-finish{font-family: Tajawal_R;}
+.zakah_heading .english-heading,.english-finish{font-family:Roboto_R;text-transform: capitalize;}
+
+/*start style donate_money page*/
+.input-money .input-group-text{
+  color: #fff;
+  background-color: #009146;
+  border: none;
+}
+.zakah_donate{
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.bounce-2 {
+  animation-name: bounce-2;
+  animation-timing-function: ease;
+}
+@keyframes bounce-2 {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+.wrapper{
+  position: absolute;
+  top:65%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height:auto;
+  margin-top:30px;
+}
+.finish-btn{
+  width:200px;
+  height:50px;
+  background:#009146;
+  border-style: none;
+  color:#fff;
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0px;
+  overflow: hidden;
+  transition: all .5s;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+}
+.finish-btn .sp{
+  position: absolute;
+  display: block;
+}
+.finish-btn .sp:nth-child(1){
+  height: 3px;
+  width:200px;
+  top:0px;
+  left:-200px;
+  background: linear-gradient(to right, rgba(0,0,0,0), #fff);
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+  animation: span1 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes span1{
+  0%{
+      left:-200px
+  }
+  100%{
+      left:200px;
+  }
+}
+.finish-btn .sp:nth-child(2){
+  height: 70px;
+  width: 3px;
+  top:-70px;
+  right:0px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), #fff);
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  animation: span2 2s linear infinite;
+  animation-delay: 2s;
+}
+@keyframes span2{
+  0%{
+      top:-70px;
+  }
+  100%{
+      top:70px;
+  }
+}
+.finish-btn .sp:nth-child(3){
+  height:3px;
+  width:200px;
+  right:-200px;
+  bottom: 0px;
+  background: linear-gradient(to left, rgba(0,0,0,0), #fff);
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+  animation: span3 2s linear infinite;
+  animation-delay: 3s;
+}
+@keyframes span3{
+  0%{
+      right:-200px;
+  }
+  100%{
+      right: 200px;
+  }
+}
+
+.finish-btn .sp:nth-child(4){
+  height:70px;
+  width:3px;
+  bottom:-70px;
+  left:0px;
+  background: linear-gradient(to top, rgba(0,0,0,0), #fff);
+  border-top-right-radius: 1px;
+  border-top-left-radius: 1px;
+  animation: span4 2s linear infinite;
+  animation-delay: 4s;
+}
+@keyframes span4{
+  0%{
+      bottom: -70px;
+  }
+  100%{
+      bottom:70px;
+  }
+}
+.donate-icon{
+  margin-top: 75px;
+}
+/*start style zakah_thanks.html*/
+.ml4 {
+  position: relative;
+  font-weight: 900;
+  font-size: 25px;
+}
+.ml4 .letters {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  top:0;
+  right: 0;
+  opacity: 0; 
+}
+.alert-warning{
+background-color: #009146 !important;
+color: #FFF;
+font-family: Tajawal_R;
+font-size: 20px;
+}
+.message{margin-top:50px;}
